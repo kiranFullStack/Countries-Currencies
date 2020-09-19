@@ -39,23 +39,6 @@ const columns = [
       sort: true,
     },
   },
-  {
-    name: 'alpha3Code',
-    label: 'Alpha Code',
-    options: {
-      filter: false,
-      sort: true,
-    },
-  },
-
-  {
-    name: 'callingCodes',
-    label: 'Ph. Code',
-    options: {
-      filter: false,
-      sort: true,
-    },
-  },
 
   {
     name: 'region',

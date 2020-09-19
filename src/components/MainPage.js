@@ -53,7 +53,7 @@ const columns = [
     name: 'topLevelDomain',
     label: 'Domain',
     options: {
-      filter: false,
+      filter: true,
       sort: true,
     },
   },

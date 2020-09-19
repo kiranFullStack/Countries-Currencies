@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './App.scss'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import IndividualCountry from './IndividualCountry'
-import MainPage from './MainPage'
-import MenuAppBar from './MenuAppBar'
+import IndividualCountry from './components/IndividualCountry'
+import MainPage from './components/MainPage'
+import MenuAppBar from './components/MenuAppBar'
 
 function App() {
   const [countriesAllData, setcountriesAllData] = useState([])

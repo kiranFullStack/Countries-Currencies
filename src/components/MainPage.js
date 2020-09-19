@@ -54,7 +54,7 @@ const columns = [
     label: 'Domain',
     options: {
       filter: true,
-      sort: true,
+      sort: false,
     },
   },
 ]

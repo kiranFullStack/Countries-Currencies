@@ -1,3 +1,5 @@
+# MVP of Country list, sort, filter and display country details in a new page on row click.
+
 # Assessment Documentation
 
 The main goal of this assessment is to create a React Application using TypeScript in order to show a list of countries, and then showing for each country the data associated to it.  

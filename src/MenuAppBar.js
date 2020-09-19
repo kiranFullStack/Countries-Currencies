@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import logo from './assets/logo.png'
+import { Link } from 'react-router-dom'
 
 import github from './assets/github.svg'
 
@@ -33,14 +34,16 @@ export default function MenuAppBar() {
     <div className={classes.root}>
       <AppBar position='static' className={classes.toolbar}>
         <Toolbar>
-          <IconButton
-            edge='start'
-            className={classes.menuButton}
-            color='inherit'
-            aria-label='menu'
-          >
-            <img style={{ height: '30px' }} src={logo} alt='' />{' '}
-          </IconButton>
+          <Link to='/'>
+            <IconButton
+              edge='start'
+              className={classes.menuButton}
+              color='inherit'
+              aria-label='menu'
+            >
+              <img style={{ height: '30px' }} src={logo} alt='' />{' '}
+            </IconButton>
+          </Link>
           <Typography variant='h6' className={classes.title}>
             Mindtree Assignment by Kiran
           </Typography>

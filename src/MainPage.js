@@ -71,7 +71,7 @@ function MainPage({ countriesAllData, loading, history }) {
         Mindtree Assignment with Listing all countries, Responsive Design,
         Sorting each feild by clicking on header, Filtering the feilds
         dynamically and reset, Search, Download CSV, Pagination and Rows per
-        page setting and fetching data from backend.
+        page setting and fetching data from countries api.
         <br />(
         <a
           href='https://github.com/kiranFullStack/Countries-Currencies'
@@ -83,7 +83,7 @@ function MainPage({ countriesAllData, loading, history }) {
           </span>
           Frontend Code
         </a>
-        ) )
+        )
       </p>
       {loading ? (
         <GridLoader css={override} size={80} color={'#BE1E80'} loading='true' />

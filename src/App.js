@@ -14,7 +14,9 @@ import IndividualCountry from './IndividualCountry'
 import MainPage from './MainPage'
 
 function App() {
+  const [initialcountriesAllData, setinitialcountriesAllData] = useState([])
   const [countriesAllData, setcountriesAllData] = useState([])
+  const [loading, setloading] = useState(true)
 
   useEffect(() => {
     let countriesAllDataUrl = 'https://restcountries.eu/rest/v2/all'
@@ -26,6 +28,8 @@ function App() {
         sortBy(response.data, ['name', 'population'])
 
         setcountriesAllData(response.data)
+        setinitialcountriesAllData(response.data)
+        setloading(false)
       })
       .catch(function(error) {
         // handle error
@@ -56,6 +60,10 @@ function App() {
     )
   }
 
+  let clearinitialcountriesAllData = () => {
+    setcountriesAllData(initialcountriesAllData)
+  }
+
   return (
     <>
       <Router>
@@ -68,6 +76,8 @@ function App() {
               sortcountriesAscending={sortcountriesAscending}
               sortcountriesDecending={sortcountriesDecending}
               countriesAllData={countriesAllData}
+              loading={loading}
+              clearinitialcountriesAllData={clearinitialcountriesAllData}
             />
           )}
         />

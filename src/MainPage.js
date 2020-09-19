@@ -1,58 +1,121 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import MUIDataTable from 'mui-datatables'
+import GridLoader from 'react-spinners/GridLoader'
+import { css } from '@emotion/core'
 
-export default function MainPage({
-  sortcountriesDecending,
-  sortcountriesAscending,
-  countriesAllData,
-  loading,
-  clearinitialcountriesAllData,
-}) {
+//
+// ─── COLUMNS FOR THE TABLE HEADER ───────────────────────────────────────────────
+//
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`
+
+const columns = [
+  {
+    name: 'name',
+    label: 'Name',
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    name: 'capital',
+    label: 'Capital',
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    name: 'population',
+    label: 'Population',
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    name: 'alpha3Code',
+    label: 'Alpha Code',
+    options: {
+      filter: false,
+      sort: true,
+    },
+  },
+
+  {
+    name: 'callingCodes',
+    label: 'Ph. Code',
+    options: {
+      filter: false,
+      sort: true,
+    },
+  },
+
+  {
+    name: 'region',
+    label: 'Region',
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+
+  {
+    name: 'topLevelDomain',
+    label: 'Domain',
+    options: {
+      filter: false,
+      sort: true,
+    },
+  },
+]
+
+function MainPage({ countriesAllData, loading, history }) {
+  const options = {
+    filter: true,
+    filterType: 'dropdown',
+    onRowClick: (data) => history.push(`/${data[0]}`, 'params'),
+  }
   return (
     <>
+      <p className='desc-para'>
+        Mindtree Assignment with Listing all countries, Responsive Design,
+        Sorting each feild by clicking on header, Filtering the feilds
+        dynamically and reset, Search, Download CSV, Pagination and Rows per
+        page setting and fetching data from backend.
+        <br />(
+        <a
+          href='https://github.com/kiranFullStack/Countries-Currencies'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <span role='img' aria-label='pointer'>
+            👉🏼
+          </span>
+          Frontend Code
+        </a>
+        ) )
+      </p>
       {loading ? (
-        'true'
+        <GridLoader css={override} size={80} color={'#BE1E80'} loading='true' />
       ) : (
         <div>
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={() => sortcountriesDecending()}
-          >
-            Sort Decending
-          </Button>
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={() => sortcountriesAscending()}
-          >
-            Sort Ascending
-          </Button>
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={() => clearinitialcountriesAllData()}
-          >
-            Clear
-          </Button>
-
-          {countriesAllData.map((item, index) => (
-            <Link key={item.name} to={`/${item.name}`}>
-              <div onClick={() => console.log(item.name)}>
-                <h1>{item.name}</h1>
-                <h1>{item.capital}</h1>
-                <h1>{item.population}</h1>
-                <img
-                  className='flag-icon'
-                  src={item.flag}
-                  alt='coumntry falg'
-                />
-              </div>
-            </Link>
-          ))}
+          <MUIDataTable
+            title={'Country List'}
+            data={countriesAllData}
+            columns={columns}
+            options={options}
+          />
         </div>
       )}
     </>
   )
 }
+
+export default withRouter(MainPage)

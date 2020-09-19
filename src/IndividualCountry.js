@@ -7,6 +7,7 @@ export default function IndividualCountry({ match }) {
 
   useEffect(() => {
     let countryIndividualDataUrl = `https://restcountries.eu/rest/v2/name/${match.params.id}`
+
     axios
       .get(countryIndividualDataUrl)
       .then(function(response) {
@@ -21,7 +22,7 @@ export default function IndividualCountry({ match }) {
       .then(function() {
         // always executed
       })
-  }, [])
+  }, [match.params.id])
   return (
     <div>
       <Link to='/'>
@@ -32,11 +33,25 @@ export default function IndividualCountry({ match }) {
         <div>
           {countryIndividualData.map((item, index) => (
             <div key={item.name}>
-              <h1>{item.name}</h1>
-              <h1>{item.nativeName}</h1>
-              <h1>{item.capital}</h1>
-              <h1>{item.population}</h1>
-              <img className='flag-icon' src={item.flag} alt='coumntry falg' />
+              {item.name === match.params.id ? (
+                <>
+                  <img
+                    className='flag-icon'
+                    src={item.flag}
+                    alt='coumntry falg'
+                  />
+                  <h1> Country name - {item.name}</h1>
+                  <h1> Capital - {item.capital}</h1>
+                  <h1> Population - {item.population}</h1>
+                  <h1> Alpha code - {item.alpha3Code}</h1>
+                  <h1>
+                    Currencies - {item.currencies[0].name} (
+                    {item.currencies[0].symbol})
+                  </h1>
+                </>
+              ) : (
+                ''
+              )}
             </div>
           ))}
         </div>

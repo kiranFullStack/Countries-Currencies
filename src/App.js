@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './App.scss'
-import { sortBy } from 'lodash'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import IndividualCountry from './IndividualCountry'
 import MainPage from './MainPage'
+import MenuAppBar from './MenuAppBar'
 
 function App() {
-  const [initialcountriesAllData, setinitialcountriesAllData] = useState([])
   const [countriesAllData, setcountriesAllData] = useState([])
   const [loading, setloading] = useState(true)
 
@@ -25,10 +17,7 @@ function App() {
       .then(function(response) {
         // handle success
         console.log(response.data)
-        sortBy(response.data, ['name', 'population'])
-
         setcountriesAllData(response.data)
-        setinitialcountriesAllData(response.data)
         setloading(false)
       })
       .catch(function(error) {
@@ -40,47 +29,33 @@ function App() {
       })
   }, [])
 
-  let sortcountriesDecending = (params) => {
-    setcountriesAllData(
-      sortBy(countriesAllData, [
-        function(o) {
-          return o.population
-        },
-      ])
-    )
-  }
-
-  let sortcountriesAscending = (params) => {
-    setcountriesAllData(
-      sortBy(countriesAllData, [
-        function(o) {
-          return o.population
-        },
-      ]).reverse()
-    )
-  }
-
-  let clearinitialcountriesAllData = () => {
-    setcountriesAllData(initialcountriesAllData)
-  }
-
   return (
     <>
       <Router>
-        <Route exact path='/:id' component={IndividualCountry} />
-        <Route
-          exact
-          path='/'
-          component={() => (
-            <MainPage
-              sortcountriesAscending={sortcountriesAscending}
-              sortcountriesDecending={sortcountriesDecending}
-              countriesAllData={countriesAllData}
-              loading={loading}
-              clearinitialcountriesAllData={clearinitialcountriesAllData}
-            />
-          )}
-        />
+        <MenuAppBar />
+        {/* Feature Description of the app with relevant links for code */}
+
+        <div className='container'>
+          <Route exact path='/:id' component={IndividualCountry} />
+          <Route
+            exact
+            path='/'
+            component={() => (
+              <MainPage countriesAllData={countriesAllData} loading={loading} />
+            )}
+          />
+          {/* Footer */}
+          <div className='footer-info'>
+            Made by Kiran -
+            <a
+              href='https://kiranfullstack.com/'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              kiranfullstack.com
+            </a>
+          </div>
+        </div>
       </Router>
     </>
   )

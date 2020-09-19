@@ -48,15 +48,6 @@ const columns = [
       sort: true,
     },
   },
-
-  {
-    name: 'topLevelDomain',
-    label: 'Domain',
-    options: {
-      filter: true,
-      sort: false,
-    },
-  },
 ]
 
 function MainPage({ countriesAllData, loading, history }) {
